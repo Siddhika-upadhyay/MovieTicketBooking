@@ -3,7 +3,9 @@ import java.util.*;
 public class AdminPanel {
     private static Scanner scanner = new Scanner(System.in);
     private static List<Movie> movies;
+    
     private static List<Booking> bookings;
+    
 
     public AdminPanel(List<Movie> movies, List<Booking> bookings) {
         AdminPanel.movies = movies;

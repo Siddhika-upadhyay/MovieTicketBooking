@@ -43,7 +43,7 @@ public class UserPanel {
 
         System.out.println("\n--- Available Movies ---");
         for (Movie movie : movies) {
-            System.out.println(movie); // Movie should override toString()
+            System.out.println(movie); 
         }
 
         System.out.print("Enter Movie ID to book: ");
@@ -116,25 +116,57 @@ public class UserPanel {
     }
 
     public static void cancelBooking(int userId, int bookingId, List<Booking> bookings, List<Movie> movies) {
-        Iterator<Booking> iterator = bookings.iterator();
-        while (iterator.hasNext()) {
-            Booking b = iterator.next();
+        Scanner scanner = new Scanner(System.in);
+    
+        for (Booking b : bookings) {
             if (b.getBookingId() == bookingId && b.getUserId() == userId) {
                 Movie m = movies.stream().filter(movie -> movie.getMovieId() == b.getMovieId()).findFirst().orElse(null);
-                if (m != null) {
-                    for (String seat : b.getSeats().split(",")) {
-                        m.unbookSeat(seat.trim());
+                if (m == null) {
+                    System.out.println("Movie not found.");
+                    return;
+                }
+    
+                String[] bookedSeats = b.getSeats().split(",");
+                System.out.println("Your booked seats: ");
+                for (String seat : bookedSeats) {
+                    System.out.print(seat.trim() + " ");
+                }
+                System.out.println("\nEnter seats to cancel (comma-separated): ");
+                String[] seatsToCancel = scanner.nextLine().split(",");
+    
+                List<String> updatedSeats = new ArrayList<>();
+                for (String seat : bookedSeats) {
+                    String trimmedSeat = seat.trim();
+                    boolean cancelThisSeat = false;
+                    for (String cancelSeat : seatsToCancel) {
+                        if (trimmedSeat.equalsIgnoreCase(cancelSeat.trim())) {
+                            cancelThisSeat = true;
+                            break;
+                        }
+                    }
+                    if (cancelThisSeat) {
+                        m.unbookSeat(trimmedSeat); 
+                    } else {
+                        updatedSeats.add(trimmedSeat); 
                     }
                 }
-                iterator.remove();
-                System.out.println("Booking cancelled.");
+    
+                if (updatedSeats.isEmpty()) {
+                    bookings.remove(b);
+                    System.out.println("All seats cancelled. Booking removed.");
+                } else {
+                    b.setSeats(String.join(",", updatedSeats));
+                    System.out.println("Selected seats cancelled. Remaining seats: " + String.join(", ", updatedSeats));
+                }
                 return;
             }
         }
+    
         System.out.println("Booking not found.");
     }
+    
 
-    // --- Helper for integer input with validation ---
+   
     private static int getIntInput(Scanner sc) {
         while (true) {
             try {

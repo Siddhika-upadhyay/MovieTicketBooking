@@ -246,12 +246,12 @@ public class TicketBookingSystem {
             return;
         }
     
-        // Print table header with borders
+
         System.out.println("+-----+------------------------------+-----------------+");
         System.out.printf("| %-3s | %-28s | %-15s |\n", "ID", "Title", "Genre");
         System.out.println("+-----+------------------------------+-----------------+");
     
-        // Print each movie row
+
         for (Movie movie : movies) {
             System.out.printf("| %-3d | %-28s | %-15s |\n", 
                 movie.getMovieId(), 
@@ -260,7 +260,7 @@ public class TicketBookingSystem {
             );
         }
     
-        // Print footer
+     
         System.out.println("+-----+------------------------------+-----------------+");
     }
     
@@ -331,3 +331,4 @@ public class TicketBookingSystem {
         }
     }
 }
+

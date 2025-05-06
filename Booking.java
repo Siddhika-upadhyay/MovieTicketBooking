@@ -48,7 +48,10 @@ public class Booking implements Serializable {
     public String toRow(Movie movie) {
         return String.format("%-10d %-20s %-10s ₹%-10.2f", bookingId, movie.getTitle(), seats, totalAmount);
     }
-
+    public void setSeats(String seats) {
+        this.seats = seats;
+    }
+    
 
   
 }
