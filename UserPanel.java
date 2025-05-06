@@ -1,9 +1,9 @@
 import java.util.*;
 
 public class UserPanel {
-
+    private static Scanner sc = new Scanner(System.in);
     public static void userMenu(User user, List<Movie> movies, List<Booking> bookings) {
-        Scanner sc = new Scanner(System.in);
+       
 
         while (true) {
             System.out.println("\n--- User Panel ---");
@@ -116,7 +116,7 @@ public class UserPanel {
     }
 
     public static void cancelBooking(int userId, int bookingId, List<Booking> bookings, List<Movie> movies) {
-        Scanner scanner = new Scanner(System.in);
+     
     
         for (Booking b : bookings) {
             if (b.getBookingId() == bookingId && b.getUserId() == userId) {
@@ -132,7 +132,7 @@ public class UserPanel {
                     System.out.print(seat.trim() + " ");
                 }
                 System.out.println("\nEnter seats to cancel (comma-separated): ");
-                String[] seatsToCancel = scanner.nextLine().split(",");
+                String[] seatsToCancel = sc.nextLine().split(",");
     
                 List<String> updatedSeats = new ArrayList<>();
                 for (String seat : bookedSeats) {

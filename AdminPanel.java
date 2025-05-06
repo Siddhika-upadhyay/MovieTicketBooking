@@ -52,7 +52,7 @@ public class AdminPanel {
     }
 
     public static void addMovie() {
-        Scanner scanner = new Scanner(System.in);
+        
 
         System.out.print("Enter Movie ID: ");
         int movieId = Integer.parseInt(scanner.nextLine());

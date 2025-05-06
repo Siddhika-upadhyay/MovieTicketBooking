@@ -1,13 +1,14 @@
 import java.util.Scanner;
 
 public class admin {
+    private static Scanner scanner = new Scanner(System.in);
     private static final String ADMIN_EMAIL = "admin@admin.com";
     private static final String ADMIN_PASSWORD = "admin123";
 
     private static boolean adminRegistered = false;
 
     public static boolean login() {
-        Scanner scanner = new Scanner(System.in);
+      
 
         if (!adminRegistered) {
             System.out.print("Enter Admin Email: ");
